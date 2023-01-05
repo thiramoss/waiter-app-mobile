@@ -19,4 +19,5 @@ export const categories = [
     name: 'Promoções',
     icon: '🏷',
   },
+
 ];
