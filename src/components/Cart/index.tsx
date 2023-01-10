@@ -11,9 +11,15 @@ import { Actions, Image, Item, ProductContainer, QuantityContainer, ProductDetai
 interface CartProps {
   cartItems: CartItem[];
   onAdd: (product: Product) => void;
+  onDecrement: (product: Product) => void;
 }
 
-export function Cart({ cartItems, onAdd }: CartProps){
+export function Cart({ cartItems, onAdd, onDecrement }: CartProps){
+
+  const total = cartItems.reduce((acc, cartItem) => {
+    return acc + cartItem.quantity * cartItem.product.price;
+  }, 0);
+
   return (
     <>
       {cartItems.length > 0 && (
@@ -51,7 +57,9 @@ export function Cart({ cartItems, onAdd }: CartProps){
                     <PlusCircle />
                   </TouchableOpacity>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => onDecrement(cartItem.product)}
+                  >
                     <MinusCircle />
                   </TouchableOpacity>
 
@@ -70,7 +78,7 @@ export function Cart({ cartItems, onAdd }: CartProps){
                   Total
               </Text>
               <Text size={20} weight="600" >
-                {formatCurrency(120)}
+                {formatCurrency(total)}
               </Text>
             </>
           ) : (
