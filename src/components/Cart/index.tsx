@@ -89,7 +89,7 @@ export function Cart({ cartItems, onAdd, onDecrement }: CartProps){
         </TotalContainer>
 
         <Button
-          onPress={() => alert('Confirmar pedido')}
+          onPress={handleConfirmOrder}
           disabled={cartItems.length === 0}
         >
                 Confirmar
